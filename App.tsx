@@ -7,6 +7,7 @@ import { Home } from './pages/Home';
 import { Learn } from './pages/Learn';
 import { Community } from './pages/Community';
 import { Tools } from './pages/Tools';
+import { Downloads } from './pages/Downloads';
 
 function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -46,6 +47,7 @@ function App() {
               element={<Navigate to="/learn/installation-setup" replace />}
             />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/downloads" element={<Downloads />} />
             <Route path="/community" element={<Community />} />
           </Routes>
         </main>

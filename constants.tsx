@@ -64,7 +64,7 @@ export const DOC_DATA: DocSection[] = [
                 Visit the DarkLight Downloads Page to download the required installation packages.
               </p>
               <Link
-                to="/tools"
+                to="/downloads"
                 className="text-brand-400 hover:text-brand-300 underline"
               >
                 Go to Downloads Page

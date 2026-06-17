@@ -11,7 +11,17 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onOpenSearch, mobileMenuOpen, setMobileMenuOpen }) => {
   const location = useLocation();
   
-  const isActive = (path: string) => location.pathname === path ? "text-brand-400" : "text-gray-300 hover:text-white";
+  const isActive = (path: string) => {
+  if (path === '/') {
+    return location.pathname === '/'
+      ? 'text-brand-400'
+      : 'text-gray-300 hover:text-white';
+  }
+
+  return location.pathname.startsWith(path)
+    ? 'text-brand-400'
+    : 'text-gray-300 hover:text-white';
+};
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-800 bg-gray-900/80 backdrop-blur">
@@ -28,6 +38,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, mobileMenuOpen, se
           <Link to="/" className={isActive('/')}>Home</Link>
           <Link to="/learn" className={isActive('/learn')}>Learn</Link>
           <Link to="/tools" className={isActive('/tools')}>Tools</Link>
+          <Link to="/downloads" className={isActive('/downloads')}>Downloads</Link>
           <Link to="/community" className={isActive('/community')}>Community</Link>
         </nav>
 
@@ -57,6 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, mobileMenuOpen, se
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 block">Home</Link>
             <Link to="/learn" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 block">Learn</Link>
             <Link to="/tools" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 block">Tools</Link>
+            <Link to="/downloads" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 block">Downloads</Link>
             <Link to="/community" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 block">Community</Link>
           </nav>
         </div>
