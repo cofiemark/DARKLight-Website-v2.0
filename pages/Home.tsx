@@ -33,6 +33,8 @@ export const Home: React.FC = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [isPinoutModalOpen, setIsPinoutModalOpen] = useState(false);
   const [activeBoard, setActiveBoard] = useState(0);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const currentBoard = BOARDS[activeBoard];
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +51,10 @@ export const Home: React.FC = () => {
       {isPinoutModalOpen && (
         <div 
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
-          onClick={() => setIsPinoutModalOpen(false)}
+          onClick={() => {
+            setIsPinoutModalOpen(false);
+            setIsCarouselPaused(false);
+          }}
         >
           <div 
             className="relative max-w-5xl w-full bg-gray-900 rounded-2xl border border-gray-700 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300"
@@ -58,10 +63,13 @@ export const Home: React.FC = () => {
             <div className="flex items-center justify-between p-4 border-b border-gray-800 bg-gray-950">
               <div className="flex items-center gap-2">
                 <Cpu className="text-brand-500" size={20} />
-                <h3 className="text-white font-bold">DarkLight Core v2 Technical Pinout</h3>
+                <h3 className="text-white font-bold">{currentBoard.title} Technical Pinout</h3>
               </div>
               <button 
-                onClick={() => setIsPinoutModalOpen(false)}
+                onClick={() => {
+                  setIsPinoutModalOpen(false);
+                  setIsCarouselPaused(false);
+                }}
                 className="p-1 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition-colors"
               >
                 <X size={24} />
@@ -69,13 +77,13 @@ export const Home: React.FC = () => {
             </div>
             <div className="p-2 md:p-8 bg-gray-900 flex items-center justify-center min-h-[400px]">
               <img 
-                src="https://69415646eaa0bc88a50c8649.imgix.net/pcb2.jpeg?auto=format&fit=crop&q=100&w=1200" 
-                alt="Detailed Hardware Pinout" 
+                src={currentBoard.pinoutImage ?? currentBoard.image.url}
+                alt={`${currentBoard.title} pinout`} 
                 className="max-w-full h-auto rounded shadow-lg border border-gray-800"
               />
             </div>
             <div className="p-4 bg-gray-950 border-t border-gray-800 text-center">
-              <p className="text-sm text-gray-400">Uhuru Development - 3.3V Logic Levels Required</p>
+              <p className="text-sm text-gray-400">{currentBoard.title} • 3.3V Logic Levels Required</p>
             </div>
           </div>
         </div>
@@ -135,16 +143,19 @@ export const Home: React.FC = () => {
                   ))}
                 </ul>
                 <button 
-                  onClick={() => setIsPinoutModalOpen(true)}
+                  onClick={() => {
+                    setIsCarouselPaused(true);
+                    setIsPinoutModalOpen(true);
+                  }}
                   className="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold transition-all flex items-center justify-center gap-2 group"
                 >
-                   View Interactive Pinout <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                   View Pinout <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </button>
              </div>
              
              {/* Carousel Container */}
              <div className="lg:w-1/2 h-[400px] lg:h-[500px] w-full rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 relative shadow-2xl">
-                 <ImageCarousel onSlideChange={setActiveBoard} />
+                 <ImageCarousel onSlideChange={setActiveBoard} isPaused={isCarouselPaused} />
              </div>
           </div>
         </div>
