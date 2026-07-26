@@ -6,7 +6,8 @@ import {
   Share2, PenTool, Activity, MoveUpRight, Anchor, Minimize2, Battery,
   Quote, Grid, Wrench, ShieldCheck, Cpu as CpuIcon
 } from 'lucide-react';
-import { ImageCarousel } from '../components/ImageCarousel';
+import { ImageCarousel, BOARDS } from '../components/ImageCarousel';
+
 
 // Brand Data
 const BRANDS = [
@@ -31,6 +32,9 @@ export const Home: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [isPinoutModalOpen, setIsPinoutModalOpen] = useState(false);
+  const [activeBoard, setActiveBoard] = useState(0);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const currentBoard = BOARDS[activeBoard];
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +51,10 @@ export const Home: React.FC = () => {
       {isPinoutModalOpen && (
         <div 
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
-          onClick={() => setIsPinoutModalOpen(false)}
+          onClick={() => {
+            setIsPinoutModalOpen(false);
+            setIsCarouselPaused(false);
+          }}
         >
           <div 
             className="relative max-w-5xl w-full bg-gray-900 rounded-2xl border border-gray-700 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300"
@@ -56,10 +63,13 @@ export const Home: React.FC = () => {
             <div className="flex items-center justify-between p-4 border-b border-gray-800 bg-gray-950">
               <div className="flex items-center gap-2">
                 <Cpu className="text-brand-500" size={20} />
-                <h3 className="text-white font-bold">DarkLight Core v2 Technical Pinout</h3>
+                <h3 className="text-white font-bold">{currentBoard.title} Technical Pinout</h3>
               </div>
               <button 
-                onClick={() => setIsPinoutModalOpen(false)}
+                onClick={() => {
+                  setIsPinoutModalOpen(false);
+                  setIsCarouselPaused(false);
+                }}
                 className="p-1 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition-colors"
               >
                 <X size={24} />
@@ -67,13 +77,13 @@ export const Home: React.FC = () => {
             </div>
             <div className="p-2 md:p-8 bg-gray-900 flex items-center justify-center min-h-[400px]">
               <img 
-                src="https://69415646eaa0bc88a50c8649.imgix.net/pcb2.jpeg?auto=format&fit=crop&q=100&w=1200" 
-                alt="Detailed Hardware Pinout" 
+                src={currentBoard.pinoutImage ?? currentBoard.image.url}
+                alt={`${currentBoard.title} pinout`} 
                 className="max-w-full h-auto rounded shadow-lg border border-gray-800"
               />
             </div>
             <div className="p-4 bg-gray-950 border-t border-gray-800 text-center">
-              <p className="text-sm text-gray-400">Uhuru Development - 3.3V Logic Levels Required</p>
+              <p className="text-sm text-gray-400">{currentBoard.title} • 3.3V Logic Levels Required</p>
             </div>
           </div>
         </div>
@@ -100,7 +110,7 @@ export const Home: React.FC = () => {
             <Link to="/learn" className="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold transition-all flex items-center justify-center gap-2">
               Start Learning <ArrowRight size={18} />
             </Link>
-            <Link to="/community" className="w-full sm:w-auto px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 rounded-lg font-semibold transition-all">
+            <Link to="/downloads" className="w-full sm:w-auto px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 rounded-lg font-semibold transition-all">
               Download Resources
             </Link>
           </div>
@@ -115,95 +125,37 @@ export const Home: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
              <div className="lg:w-1/2">
-                <h2 className="text-3xl font-bold text-white mb-4">Our Development Boards</h2>
+                <h2 className="text-3xl font-bold text-white mb-4">{BOARDS[activeBoard].title}</h2>
                 <p className="text-gray-400 mb-6 text-lg leading-relaxed">
-                  Uhuru is the entry board in the DarkLight's development board line-up, the DarkLight Core features isn't just powerful—it's built to last. Experience the next level of embedded hardware.
+                  {BOARDS[activeBoard].description}
                 </p>
                 <ul className="space-y-4 mb-8">
-                    <li className="flex items-start text-gray-300">
-                        <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">48MHz Arm Cortex M0 CPU</p>
-                        </div>
+                    {BOARDS[activeBoard].specs.map((spec, index) => (
+                    <li key={index} className="flex items-start text-gray-300">
+                      <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
+                        <Check size={12} className="text-brand-400" />
+                      </div>
+
+                      <div>
+                        <p className="font-bold text-white">{spec}</p>
+                      </div>
                     </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">256 Kbytes Flash</p>
-                        </div>
-                    </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">32 Kbytes SRAM</p>
-                        </div>
-                    </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">48 Multiplexed I/O</p>
-                        </div>
-                    </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">2 SPI, 2 UART, 2 I2C</p>
-                        </div>
-                    </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">16 Channel ADC</p>
-                        </div>
-                    </li>
-                     <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">Advanced PWM Timer</p>
-                        </div>
-                    </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">2 Independent Watchdog Timers</p>
-                        </div>
-                    </li>
-                    <li className="flex items-start text-gray-300">
-                         <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                          <Check size={12} className="text-brand-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">DMA</p>
-                        </div>
-                    </li>
+                  ))}
                 </ul>
                 <button 
-                  onClick={() => setIsPinoutModalOpen(true)}
+                  onClick={() => {
+                    setIsCarouselPaused(true);
+                    setIsPinoutModalOpen(true);
+                  }}
                   className="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold transition-all flex items-center justify-center gap-2 group"
                 >
-                   View Interactive Pinout <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                   View Pinout <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </button>
              </div>
              
              {/* Carousel Container */}
              <div className="lg:w-1/2 h-[400px] lg:h-[500px] w-full rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 relative shadow-2xl">
-                 <ImageCarousel />
+                 <ImageCarousel onSlideChange={setActiveBoard} isPaused={isCarouselPaused} />
              </div>
           </div>
         </div>

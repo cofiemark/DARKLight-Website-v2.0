@@ -36,10 +36,6 @@ export const Downloads: React.FC = () => {
               Resource
             </th>
 
-            {/*<th className="px-5 py-3 text-left text-sm font-semibold text-white">
-              Type
-            </th>*/}
-
             <th className="px-5 py-3 text-left text-sm font-semibold text-white">
               Description
             </th>
@@ -55,17 +51,11 @@ export const Downloads: React.FC = () => {
             <tr
               key={item.title}
               className={`border-b border-slate-800 hover:bg-slate-900/40 transition-colors ${
-                index === items.length - 1
-                  ? 'border-b-0'
-                  : ''
+                index === items.length - 1 ? 'border-b-0' : ''
               }`}
             >
               <td className="px-5 py-4 font-medium text-white">
                 {item.title}
-              </td>
-
-              <td className="px-5 py-4 text-gray-300">
-                {item.type}
               </td>
 
               <td className="px-5 py-4 text-gray-400">
@@ -94,7 +84,7 @@ export const Downloads: React.FC = () => {
       title: 'SEGGER Embedded Studio',
       type: 'IDE',
       description:
-        'Development environment used to build, flash and debug DarkLight applications.',
+        'Development environment used to build, and debug embedded system applications.',
       actionText: 'Visit SEGGER',
       link: 'https://www.segger.com/downloads/embedded-studio/',
     },
@@ -102,7 +92,7 @@ export const Downloads: React.FC = () => {
       title: 'J-Link Software Pack',
       type: 'Debugger',
       description:
-        'Required software package for J-Link flashing and debugging tools.',
+        'Software tool to program, debug and trace embedded microcontrollers.',
       actionText: 'Visit SEGGER',
       link: 'https://www.segger.com/downloads/jlink/',
     },
@@ -114,30 +104,20 @@ export const Downloads: React.FC = () => {
       actionText: 'Download',
       link: '#',
     },
-    {
-      title: 'CPU Support Package',
-      type: 'SDK',
-      description:
-        'Device definitions, startup files and toolchain support packages.',
-      actionText: 'Download',
-      link: '#',
-    },
   ];
 
   const libraries: DownloadItem[] = [
     {
       title: 'lib_ws2812b',
       type: 'Library',
-      description:
-        'WS2812B addressable RGB LED driver library.',
+      description: 'WS2812B addressable RGB LED driver library.',
       actionText: 'Download ZIP',
       link: '#',
     },
     {
       title: 'lib_apa102',
       type: 'Library',
-      description:
-        'APA102 LED strip driver library.',
+      description: 'APA102 addressable RGB LED driver library.',
       actionText: 'Download ZIP',
       link: '#',
     },
@@ -147,8 +127,7 @@ export const Downloads: React.FC = () => {
     {
       title: 'CPU Support Package',
       type: 'SDK',
-      description:
-        'Official CPU support package for DarkLight Uhuru.',
+      description: 'Device definitions, startup files and toolchain support packages.',
       actionText: 'Download',
       link: '#',
     },
@@ -163,24 +142,21 @@ export const Downloads: React.FC = () => {
     {
       title: 'FreeRTOS Template',
       type: 'Template',
-      description:
-        'Starter project configured with FreeRTOS.',
+      description: 'Starter project configured with FreeRTOS.',
       actionText: 'Download ZIP',
       link: '#',
     },
     {
       title: 'EmbOS Template',
       type: 'Template',
-      description:
-        'Starter project configured with SEGGER EmbOS.',
+      description: 'Starter project configured with SEGGER EmbOS.',
       actionText: 'Download ZIP',
       link: '#',
     },
     {
       title: 'Baremetal Template',
       type: 'Template',
-      description:
-        'Minimal firmware template without RTOS.',
+      description: 'Minimal firmware template without RTOS.',
       actionText: 'Download ZIP',
       link: '#',
     },
@@ -198,8 +174,7 @@ export const Downloads: React.FC = () => {
     {
       title: 'CPU Support Package',
       type: 'SDK',
-      description:
-        'Official CPU support package for DarkLight Katana.',
+      description: 'Device definitions, startup files and toolchain support packages.',
       actionText: 'Download',
       link: '#',
     },
@@ -214,24 +189,21 @@ export const Downloads: React.FC = () => {
     {
       title: 'FreeRTOS Template',
       type: 'Template',
-      description:
-        'Starter project configured with FreeRTOS.',
+      description: 'Starter project configured with FreeRTOS.',
       actionText: 'Download ZIP',
       link: '#',
     },
     {
       title: 'EmbOS Template',
       type: 'Template',
-      description:
-        'Starter project configured with SEGGER EmbOS.',
+      description: 'Starter project configured with SEGGER EmbOS.',
       actionText: 'Download ZIP',
       link: '#',
     },
     {
       title: 'Baremetal Template',
       type: 'Template',
-      description:
-        'Minimal firmware template without RTOS.',
+      description: 'Minimal firmware template without RTOS.',
       actionText: 'Download ZIP',
       link: '#',
     },
@@ -246,25 +218,20 @@ export const Downloads: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
+    <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-1">
       {/* Sidebar */}
-      <aside className="lg:w-64 flex-shrink-0">
+      <aside className="lg:w-44 flex-shrink-0">
         <div className="sticky top-24 space-y-8">
           <div>
             <h5 className="font-bold text-white mb-3 flex items-center gap-2">
-              <BookOpen
-                size={16}
-                className="text-brand-500"
-              />
+              <BookOpen size={16} className="text-brand-500" />
               Downloads
             </h5>
 
-            <ul className="space-y-1 border-l border-gray-800 ml-2">
+            <ul className="space-y-1 border-l border-gray-800 ml-1">
               <li>
                 <button
-                  onClick={() =>
-                    scrollToSection('software-tools')
-                  }
+                  onClick={() => scrollToSection('software-tools')}
                   className="w-full text-left pl-4 py-1 text-sm border-l-2 border-transparent text-gray-400 hover:text-white hover:border-gray-600 transition-colors"
                 >
                   Software Tools
@@ -273,9 +240,7 @@ export const Downloads: React.FC = () => {
 
               <li>
                 <button
-                  onClick={() =>
-                    scrollToSection('libraries')
-                  }
+                  onClick={() => scrollToSection('libraries')}
                   className="w-full text-left pl-4 py-1 text-sm border-l-2 border-transparent text-gray-400 hover:text-white hover:border-gray-600 transition-colors"
                 >
                   Libraries
@@ -312,64 +277,47 @@ export const Downloads: React.FC = () => {
           </h1>
 
           <p className="text-xl text-gray-400 mb-12 border-b border-gray-800 pb-8">
-            Download SDKs, software tools, libraries,
-            templates, datasheets and development
-            resources for the DarkLight ecosystem.
+            Download SDKs, software tools, libraries, templates,
+            datasheets and development resources for the DarkLight ecosystem.
           </p>
 
-          <section
-            id="software-tools"
-            className="scroll-mt-24 mb-20"
-          >
+          <section id="software-tools" className="scroll-mt-24 mb-20">
             <div className="flex items-center gap-3 mb-8">
               <Wrench className="text-brand-500" />
               <h2 className="text-2xl font-bold text-white">
                 Software Tools
               </h2>
             </div>
-
             <DownloadTable items={softwareTools} />
           </section>
 
-          <section
-            id="libraries"
-            className="scroll-mt-24 mb-20"
-          >
+          <section id="libraries" className="scroll-mt-24 mb-20">
             <div className="flex items-center gap-3 mb-8">
               <Library className="text-brand-500" />
               <h2 className="text-2xl font-bold text-white">
                 Libraries
               </h2>
             </div>
-
             <DownloadTable items={libraries} />
           </section>
 
-          <section
-            id="uhuru"
-            className="scroll-mt-24 mb-20"
-          >
+          <section id="uhuru" className="scroll-mt-24 mb-20">
             <div className="flex items-center gap-3 mb-8">
               <Cpu className="text-brand-500" />
               <h2 className="text-2xl font-bold text-white">
                 DarkLight Uhuru Downloadables
               </h2>
             </div>
-
             <DownloadTable items={uhuruDownloads} />
           </section>
 
-          <section
-            id="katana"
-            className="scroll-mt-24 mb-20"
-          >
+          <section id="katana" className="scroll-mt-24 mb-20">
             <div className="flex items-center gap-3 mb-8">
               <Cpu className="text-brand-500" />
               <h2 className="text-2xl font-bold text-white">
                 DarkLight Katana Downloadables
               </h2>
             </div>
-
             <DownloadTable items={katanaDownloads} />
           </section>
         </div>
