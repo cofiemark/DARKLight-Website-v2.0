@@ -6,7 +6,8 @@ import {
   Share2, PenTool, Activity, MoveUpRight, Anchor, Minimize2, Battery,
   Quote, Grid, Wrench, ShieldCheck, Cpu as CpuIcon
 } from 'lucide-react';
-import { ImageCarousel, BOARDS } from '../components/ImageCarousel';
+import { BOARDS } from '../components/ImageCarousel';
+import { BoardShowcaseCarousel } from '../components/BoardShowcaseCarousel';
 
 
 // Brand Data
@@ -33,7 +34,6 @@ export const Home: React.FC = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [isPinoutModalOpen, setIsPinoutModalOpen] = useState(false);
   const [activeBoard, setActiveBoard] = useState(0);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
   const currentBoard = BOARDS[activeBoard];
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -53,7 +53,6 @@ export const Home: React.FC = () => {
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
           onClick={() => {
             setIsPinoutModalOpen(false);
-            setIsCarouselPaused(false);
           }}
         >
           <div 
@@ -68,7 +67,6 @@ export const Home: React.FC = () => {
               <button 
                 onClick={() => {
                   setIsPinoutModalOpen(false);
-                  setIsCarouselPaused(false);
                 }}
                 className="p-1 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition-colors"
               >
@@ -120,46 +118,15 @@ export const Home: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-500/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
       </section>
 
-      {/* Showcase Section with Image Carousel */}
-      <section className="py-12 bg-gray-950 border-y border-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-             <div className="lg:w-1/2">
-                <h2 className="text-3xl font-bold text-white mb-4">{BOARDS[activeBoard].title}</h2>
-                <p className="text-gray-400 mb-6 text-lg leading-relaxed">
-                  {BOARDS[activeBoard].description}
-                </p>
-                <ul className="space-y-4 mb-8">
-                    {BOARDS[activeBoard].specs.map((spec, index) => (
-                    <li key={index} className="flex items-start text-gray-300">
-                      <div className="w-5 h-5 bg-brand-500/20 border border-brand-500 rounded flex items-center justify-center mr-3 shrink-0 mt-0.5">
-                        <Check size={12} className="text-brand-400" />
-                      </div>
-
-                      <div>
-                        <p className="font-bold text-white">{spec}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <button 
-                  onClick={() => {
-                    setIsCarouselPaused(true);
-                    setIsPinoutModalOpen(true);
-                  }}
-                  className="w-full sm:w-auto px-8 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold transition-all flex items-center justify-center gap-2 group"
-                >
-                   View Pinout <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-                </button>
-             </div>
-             
-             {/* Carousel Container */}
-             <div className="lg:w-1/2 h-[400px] lg:h-[500px] w-full rounded-2xl overflow-hidden border border-gray-800 bg-gray-900 relative shadow-2xl">
-                 <ImageCarousel onSlideChange={setActiveBoard} isPaused={isCarouselPaused} />
-             </div>
-          </div>
-        </div>
-      </section>
+      {/* Hardware Lineup - Full-Section Scrollable Showcase Carousel */}
+      <BoardShowcaseCarousel
+        activeBoard={activeBoard}
+        onBoardChange={setActiveBoard}
+        onOpenPinout={(boardIndex) => {
+          setActiveBoard(boardIndex);
+          setIsPinoutModalOpen(true);
+        }}
+      />
 
 
 
