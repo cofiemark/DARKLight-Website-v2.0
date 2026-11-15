@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+const uhuruBoardImg = new URL('../images/pic-microcontroller-projects.jpg', import.meta.url).href;
+const katanaBoardImg = new URL('../images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp', import.meta.url).href;
+const bravoBoardImg = new URL('../images/Best_Microcontrollers_for_Robotics.webp', import.meta.url).href;
+const uhuruConnectImg = new URL('../images/mcubanner.jpg', import.meta.url).href;
+const katanaConnectImg = new URL('../images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp', import.meta.url).href;
+const pinoutDiagramA = new URL('../images/mcu-pinout.webp', import.meta.url).href;
+const pinoutDiagramB = new URL('../images/images.jpeg', import.meta.url).href;
+
 export const BOARDS = [
   {
     title: 'DarkLight Uhuru',
@@ -18,11 +26,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: '/images/pic-microcontroller-projects.jpg',
+      url: uhuruBoardImg,
       title: 'DarkLight Uhuru',
       desc: 'Entry-level professional embedded development board.',
     },
-    pinoutImage: '/images/mcu-pinout.webp',
+    pinoutImage: pinoutDiagramA,
   },
   {
     title: 'DarkLight Katana',
@@ -40,11 +48,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: '/images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp',
+      url: katanaBoardImg,
       title: 'DarkLight Katana',
       desc: 'Mid-tier development board for advanced applications.',
     },
-    pinoutImage: '/images/images.jpeg',
+    pinoutImage: pinoutDiagramB,
   },
   {
     title: 'DarkLight Bravo',
@@ -62,11 +70,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: '/images/mcubanner.jpg',
+      url: bravoBoardImg,
       title: 'DarkLight Bravo',
       desc: 'Flagship development board for professional applications.',
     },
-    pinoutImage: '/images/mcu-pinout.webp',
+    pinoutImage: pinoutDiagramA,
   },
   {
     title: 'DarkLight Uhuru Connect',
@@ -84,11 +92,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: '/images/pic-microcontroller-projects.jpg',
+      url: uhuruConnectImg,
       title: 'DarkLight Uhuru Connect',
       desc: 'Entry-level board with wireless connectivity.',
     },
-    pinoutImage: '/images/images.jpeg',
+    pinoutImage: pinoutDiagramB,
   },
   {
     title: 'DarkLight Katana Connect',
@@ -106,11 +114,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: '/images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp',
+      url: katanaConnectImg,
       title: 'DarkLight Katana Connect',
       desc: 'Mid-tier board with wireless connectivity.',
     },
-    pinoutImage: '/images/mcu-pinout.webp',
+    pinoutImage: pinoutDiagramA,
   },
 ];
 

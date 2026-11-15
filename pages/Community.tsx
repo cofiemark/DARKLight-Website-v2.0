@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Download, ExternalLink, Code, Video, FileCode, Monitor, Play } from 'lucide-react';
 
+const neopixelProjectImg = new URL('../images/FJR4C12KR8CCQDL-1024x649.jpg', import.meta.url).href;
+const tickerProjectImg = new URL('../images/human_detection_robot_using_pir.webp', import.meta.url).href;
+const explainerVideoImg = new URL('../images/mcubanner.jpg', import.meta.url).href;
+
 export const Community: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -81,7 +85,7 @@ export const Community: React.FC = () => {
             <div className="group cursor-pointer bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-brand-500/50 transition-all">
               <div className="overflow-hidden h-48 relative">
                 <img
-                  src="images/FJR4C12KR8CCQDL-1024x649.jpg"
+                  src={neopixelProjectImg}
                   alt="Neopixel Project"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -102,7 +106,7 @@ export const Community: React.FC = () => {
             <div className="group cursor-pointer bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-brand-500/50 transition-all">
               <div className="overflow-hidden h-48 relative">
                 <img
-                  src="images/human_detection_robot_using_pir.webp"
+                  src={tickerProjectImg}
                   alt="Ticker Project"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -139,7 +143,7 @@ export const Community: React.FC = () => {
             ) : (
               <div className="w-full h-full cursor-pointer relative" onClick={() => setIsPlaying(true)}>
                 <img
-                  src="/images/mcubanner.jpg"
+                  src={explainerVideoImg}
                   alt="DarkLight Explainer"
                   className="w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-500"
                 />

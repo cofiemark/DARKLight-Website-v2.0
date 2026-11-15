@@ -9,6 +9,13 @@ import {
 import { BOARDS } from '../components/ImageCarousel';
 import { BoardShowcaseCarousel } from '../components/BoardShowcaseCarousel';
 
+const connectShieldImg = new URL('../images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp', import.meta.url).href;
+const twoWheelImg = new URL('../images/two wheel.webp', import.meta.url).href;
+const visionModuleImg = new URL('../images/maxresdefault.jpg', import.meta.url).href;
+const roboticsKitImg = new URL('../images/basic-robotics-kits-for-engineering-students.jpg', import.meta.url).href;
+const canBusLoggerImg = new URL('../images/Best_Microcontrollers_for_Robotics.webp', import.meta.url).href;
+const smartMonitorImg = new URL('../images/hqdefault.jpg', import.meta.url).href;
+
 
 // Brand Data
 const BRANDS = [
@@ -230,7 +237,7 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all">
               <div className="h-32 bg-gray-800 relative overflow-hidden">
-                <img src="/images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp?auto=format&fit=crop&q=80&w=400" alt="WiFi Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
+                <img src={connectShieldImg} alt="WiFi Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
                 <div className="absolute top-2 right-2 bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
               </div>
               <div className="p-4">
@@ -241,7 +248,7 @@ export const Home: React.FC = () => {
 
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all">
               <div className="h-32 bg-gray-800 relative overflow-hidden">
-                <img src="images/two wheel.webp?auto=format&fit=crop&q=80&w=400" alt="Motor Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
+                <img src={twoWheelImg} alt="Motor Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
               </div>
               <div className="p-4">
                 <h4 className="text-white font-bold mb-1">Debug Shield</h4>
@@ -251,7 +258,7 @@ export const Home: React.FC = () => {
 
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all">
               <div className="h-32 bg-gray-800 relative overflow-hidden">
-                <img src="images/maxresdefault.jpg" alt="Display" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
+                <img src={visionModuleImg} alt="Display" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
               </div>
               <div className="p-4">
                 <h4 className="text-white font-bold mb-1">Vision Module</h4>
@@ -341,7 +348,7 @@ export const Home: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="group relative rounded-xl overflow-hidden aspect-video bg-gray-800 cursor-pointer">
-            <img src="/images/basic-robotics-kits-for-engineering-students.jpg" alt="Robot" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
+            <img src={roboticsKitImg} alt="Robot" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
               <div className="flex items-center gap-2 mb-2">
                 <Box size={14} className="text-brand-400" />
@@ -352,7 +359,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="group relative rounded-xl overflow-hidden aspect-video bg-gray-800 cursor-pointer">
-            <img src="https://69415646eaa0bc88a50c8649.imgix.net/WhatsApp%20Image%202025-12-16%20at%2013.09.50.jpeg?auto=format&fit=crop&q=80&w=800" alt="Dashboard" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
+            <img src={canBusLoggerImg} alt="Dashboard" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
               <div className="flex items-center gap-2 mb-2">
                 <Gauge size={14} className="text-purple-400" />
@@ -363,7 +370,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="group relative rounded-xl overflow-hidden aspect-video bg-gray-800 cursor-pointer">
-            <img src="/images/hqdefault.jpg" alt="Home Automation" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
+            <img src={smartMonitorImg} alt="Home Automation" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
               <div className="flex items-center gap-2 mb-2">
                 <Wifi size={14} className="text-blue-400" />

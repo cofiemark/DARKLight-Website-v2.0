@@ -175,39 +175,39 @@ const LIBRARIES: (DownloadItem & {
   protocol: string;
   waveformType: 'nzr' | 'spi';
 })[] = [
-  {
-    id: 'lib-ws2812b',
-    title: 'lib_ws2812b',
-    type: 'Library',
-    category: 'libraries',
-    description:
-      'Zero-CPU-overhead WS2812B addressable RGB LED driver leveraging hardware PWM + DMA circular buffers for deterministic 800kHz timing.',
-    actionText: 'Download ZIP',
-    link: '#',
-    version: 'v1.4.2',
-    sizeOrPlatform: '420 KB • C99 Source',
-    formatBadge: 'DMA LIBRARY',
-    headerFile: '#include "dl_ws2812b_dma.h"',
-    protocol: '800 kHz Single-Wire NZR + DMA',
-    waveformType: 'nzr',
-  },
-  {
-    id: 'lib-apa102',
-    title: 'lib_apa102',
-    type: 'Library',
-    category: 'libraries',
-    description:
-      'High-refresh APA102 (DotStar) addressable RGB LED driver utilizing hardware SPI master + DMA channels up to 24 MHz clock rates.',
-    actionText: 'Download ZIP',
-    link: '#',
-    version: 'v1.3.0',
-    sizeOrPlatform: '385 KB • C99 Source',
-    formatBadge: 'SPI LIBRARY',
-    headerFile: '#include "dl_apa102_spi.h"',
-    protocol: '24 MHz Dual-Wire SPI + DMA',
-    waveformType: 'spi',
-  },
-];
+    {
+      id: 'lib-ws2812b',
+      title: 'lib_ws2812b',
+      type: 'Library',
+      category: 'libraries',
+      description:
+        'Zero-CPU-overhead WS2812B addressable RGB LED driver leveraging hardware PWM + DMA circular buffers for deterministic 800kHz timing.',
+      actionText: 'Download ZIP',
+      link: '#',
+      version: 'v1.4.2',
+      sizeOrPlatform: '420 KB • C99 Source',
+      formatBadge: 'DMA LIBRARY',
+      headerFile: '#include "dl_ws2812b_dma.h"',
+      protocol: '800 kHz Single-Wire NZR + DMA',
+      waveformType: 'nzr',
+    },
+    {
+      id: 'lib-apa102',
+      title: 'lib_apa102',
+      type: 'Library',
+      category: 'libraries',
+      description:
+        'High-refresh APA102 (DotStar) addressable RGB LED driver utilizing hardware SPI master + DMA channels up to 24 MHz clock rates.',
+      actionText: 'Download ZIP',
+      link: '#',
+      version: 'v1.3.0',
+      sizeOrPlatform: '385 KB • C99 Source',
+      formatBadge: 'SPI LIBRARY',
+      headerFile: '#include "dl_apa102_spi.h"',
+      protocol: '24 MHz Dual-Wire SPI + DMA',
+      waveformType: 'spi',
+    },
+  ];
 
 const getBoardDownloads = (boardTitle: string, shortName: string, hasWireless?: boolean): DownloadItem[] => [
   {
@@ -280,9 +280,8 @@ const getBoardDownloads = (boardTitle: string, shortName: string, hasWireless?: 
     title: 'Peripheral & DMA Example Suite',
     type: 'Examples',
     category: 'sdk',
-    description: `25+ verified reference projects covering non-blocking SPI/I2C/UART DMA transfers, 16-ch ADC scan, PWM motor control${
-      hasWireless ? ', and MQTT telemetry' : ''
-    }.`,
+    description: `25+ verified reference projects covering non-blocking SPI/I2C/UART DMA transfers, 16-ch ADC scan, PWM motor control${hasWireless ? ', and MQTT telemetry' : ''
+      }.`,
     actionText: 'View Projects',
     link: '#',
     version: 'v2.4.0',
@@ -645,11 +644,10 @@ export const Downloads: React.FC = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveCategory(tab.id)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
-                      isActive
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${isActive
                         ? 'bg-brand-600 text-white border-brand-500 shadow-lg shadow-brand-600/20'
                         : 'bg-gray-950/70 text-gray-400 border-gray-800 hover:bg-gray-800 hover:text-gray-200'
-                    }`}
+                      }`}
                   >
                     {tab.label}
                   </button>
@@ -731,17 +729,15 @@ export const Downloads: React.FC = () => {
                       <li key={board.id}>
                         <button
                           onClick={() => handleSelectBoardAndScroll(idx)}
-                          className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all ${
-                            isSelected
+                          className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all ${isSelected
                               ? 'bg-gray-800 text-white border border-gray-700 shadow-sm'
                               : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/40'
-                          }`}
+                            }`}
                         >
                           <span className="flex items-center gap-2 truncate">
                             <span
-                              className={`w-2 h-2 rounded-full ${
-                                isSelected ? 'bg-brand-400 animate-pulse' : 'bg-gray-600'
-                              }`}
+                              className={`w-2 h-2 rounded-full ${isSelected ? 'bg-brand-400 animate-pulse' : 'bg-gray-600'
+                                }`}
                             />
                             <span className="truncate">DarkLight {board.shortName}</span>
                           </span>
@@ -915,16 +911,14 @@ export const Downloads: React.FC = () => {
                         role="tab"
                         aria-selected={isActive}
                         onClick={() => setSelectedBoardIdx(idx)}
-                        className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 border ${
-                          isActive
+                        className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 border ${isActive
                             ? 'bg-gray-900 text-white border-brand-500/60 shadow-lg shadow-brand-500/10 ring-1 ring-brand-500/30'
                             : 'bg-gray-900/50 text-gray-400 border-gray-800 hover:bg-gray-800 hover:text-gray-200'
-                        }`}
+                          }`}
                       >
                         <span
-                          className={`w-2 h-2 rounded-full ${
-                            isActive ? 'bg-brand-400 scale-125 animate-pulse' : 'bg-gray-600'
-                          }`}
+                          className={`w-2 h-2 rounded-full ${isActive ? 'bg-brand-400 scale-125 animate-pulse' : 'bg-gray-600'
+                            }`}
                         />
                         <span>DarkLight {theme.shortName}</span>
                         {theme.hasWireless && (
