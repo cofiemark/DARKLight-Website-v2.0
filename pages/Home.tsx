@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, Zap, Cpu, Layers, Check, X, Box, Wifi, Gauge, 
-  Settings, Terminal, Play, ChevronDown, Cloud, Disc, Triangle, 
+import {
+  ArrowRight, Zap, Cpu, Layers, Check, X, Box, Wifi, Gauge,
+  Settings, Terminal, Play, ChevronDown, Cloud, Disc, Triangle,
   Share2, PenTool, Activity, MoveUpRight, Anchor, Minimize2, Battery,
   Quote, Grid, Wrench, ShieldCheck, Cpu as CpuIcon
 } from 'lucide-react';
@@ -49,13 +49,13 @@ export const Home: React.FC = () => {
     <div className="flex flex-col">
       {/* Pinout Modal Popup */}
       {isPinoutModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
           onClick={() => {
             setIsPinoutModalOpen(false);
           }}
         >
-          <div 
+          <div
             className="relative max-w-5xl w-full bg-gray-900 rounded-2xl border border-gray-700 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
@@ -64,7 +64,7 @@ export const Home: React.FC = () => {
                 <Cpu className="text-brand-500" size={20} />
                 <h3 className="text-white font-bold">{currentBoard.title} Technical Pinout</h3>
               </div>
-              <button 
+              <button
                 onClick={() => {
                   setIsPinoutModalOpen(false);
                 }}
@@ -74,9 +74,9 @@ export const Home: React.FC = () => {
               </button>
             </div>
             <div className="p-2 md:p-8 bg-gray-900 flex items-center justify-center min-h-[400px]">
-              <img 
+              <img
                 src={currentBoard.pinoutImage ?? currentBoard.image.url}
-                alt={`${currentBoard.title} pinout`} 
+                alt={`${currentBoard.title} pinout`}
                 className="max-w-full h-auto rounded shadow-lg border border-gray-800"
               />
             </div>
@@ -100,8 +100,8 @@ export const Home: React.FC = () => {
             </span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-            The ultimate platform to LEARN, BUILD and DEPLOY fast & deterministic 
-            real-time embedded system applications for the most 
+            The ultimate platform to LEARN, BUILD and DEPLOY fast & deterministic
+            real-time embedded system applications for the most
             challenging environment.<br />
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -113,7 +113,7 @@ export const Home: React.FC = () => {
             </Link>
           </div>
         </div>
-        
+
         {/* Abstract Background Elements */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-500/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
       </section>
@@ -200,7 +200,7 @@ export const Home: React.FC = () => {
             {/* Feature 6 */}
             <div className="p-8 rounded-2xl bg-gray-950/50 border border-gray-800 hover:border-brand-500/40 transition-all group">
               <div className="w-12 h-12 rounded-lg bg-brand-500/10 flex items-center justify-center mb-6 text-brand-400 group-hover:bg-brand-500/20">
-                <ShieldCheck size={24} /> 
+                <ShieldCheck size={24} />
               </div>
               <h3 className="text-white font-bold text-xl mb-3">Prototype to Production</h3>
               <p className="text-gray-400 leading-relaxed">
@@ -223,48 +223,48 @@ export const Home: React.FC = () => {
               </p>
             </div>
             <Link to="/tools" className="hidden md:flex text-brand-400 hover:text-white items-center gap-2 text-sm font-semibold mt-4 md:mt-0">
-               View Compatibility Guide <ArrowRight size={16} />
+              View Compatibility Guide <ArrowRight size={16} />
             </Link>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all">
-               <div className="h-32 bg-gray-800 relative overflow-hidden">
-                  <img src="https://69415646eaa0bc88a50c8649.imgix.net/24078-J-Link-Mini-Feature.webp?auto=format&fit=crop&q=80&w=400" alt="WiFi Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
-                  <div className="absolute top-2 right-2 bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
-               </div>
-               <div className="p-4">
-                  <h4 className="text-white font-bold mb-1">Connect Shield</h4>
-                  <p className="text-xs text-gray-500">WiFi 6 & BLE 5.0 Combo</p>
-               </div>
+              <div className="h-32 bg-gray-800 relative overflow-hidden">
+                <img src="/images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp?auto=format&fit=crop&q=80&w=400" alt="WiFi Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
+                <div className="absolute top-2 right-2 bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</div>
+              </div>
+              <div className="p-4">
+                <h4 className="text-white font-bold mb-1">Connect Shield</h4>
+                <p className="text-xs text-gray-500">WiFi 6 & BLE 5.0 Combo</p>
+              </div>
             </div>
 
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all">
-               <div className="h-32 bg-gray-800 relative overflow-hidden">
-                  <img src="https://69415646eaa0bc88a50c8649.imgix.net/ST-Link-V2_2.webp?auto=format&fit=crop&q=80&w=400" alt="Motor Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
-               </div>
-               <div className="p-4">
-                  <h4 className="text-white font-bold mb-1">Debug Shield</h4>
-                  <p className="text-xs text-gray-500">ST-Lin k V2.2</p>
-               </div>
+              <div className="h-32 bg-gray-800 relative overflow-hidden">
+                <img src="images/two wheel.webp?auto=format&fit=crop&q=80&w=400" alt="Motor Shield" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
+              </div>
+              <div className="p-4">
+                <h4 className="text-white font-bold mb-1">Debug Shield</h4>
+                <p className="text-xs text-gray-500">ST-Lin k V2.2</p>
+              </div>
             </div>
 
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all">
-               <div className="h-32 bg-gray-800 relative overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400" alt="Display" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
-               </div>
-               <div className="p-4">
-                  <h4 className="text-white font-bold mb-1">Vision Module</h4>
-                  <p className="text-xs text-gray-500">2.4" OLED 128x64 SPI</p>
-               </div>
+              <div className="h-32 bg-gray-800 relative overflow-hidden">
+                <img src="images/maxresdefault.jpg" alt="Display" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" />
+              </div>
+              <div className="p-4">
+                <h4 className="text-white font-bold mb-1">Vision Module</h4>
+                <p className="text-xs text-gray-500">2.4" OLED 128x64 SPI</p>
+              </div>
             </div>
 
             <div className="group bg-gray-950 border border-gray-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all flex flex-col items-center justify-center p-6 text-center">
-               <div className="w-12 h-12 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center mb-3 group-hover:bg-gray-800">
-                  <Grid className="text-gray-500" />
-               </div>
-               <h4 className="text-gray-400 font-bold text-sm">Custom Proto</h4>
-               <p className="text-[10px] text-gray-600 mt-1">Design your own</p>
+              <div className="w-12 h-12 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center mb-3 group-hover:bg-gray-800">
+                <Grid className="text-gray-500" />
+              </div>
+              <h4 className="text-gray-400 font-bold text-sm">Custom Proto</h4>
+              <p className="text-[10px] text-gray-600 mt-1">Design your own</p>
             </div>
           </div>
         </div>
@@ -280,7 +280,7 @@ export const Home: React.FC = () => {
             <h2 className="text-3xl font-bold text-white mb-4">Engineering Voices</h2>
             <p className="text-gray-400">Trusted by lead engineers for critical embedded applications.</p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gray-900 border border-gray-800 p-8 rounded-2xl relative">
               <Quote className="absolute top-8 right-8 text-brand-900" size={48} />
@@ -327,50 +327,50 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-            {/* Built With DarkLight (Community Showcase) */}
+      {/* Built With DarkLight (Community Showcase) */}
       <section className="py-24 container mx-auto px-4">
         <div className="flex justify-between items-end mb-12">
-           <div>
-             <h2 className="text-3xl font-bold text-white mb-2">Built With DarkLight</h2>
-             <p className="text-gray-400">See what our community is building.</p>
-           </div>
-           <Link to="/community" className="hidden md:flex text-brand-400 hover:text-white items-center gap-2 text-sm font-semibold">
-              View All Projects <ArrowRight size={16} />
-           </Link>
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-2">Built With DarkLight</h2>
+            <p className="text-gray-400">See what our community is building.</p>
+          </div>
+          <Link to="/community" className="hidden md:flex text-brand-400 hover:text-white items-center gap-2 text-sm font-semibold">
+            View All Projects <ArrowRight size={16} />
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="group relative rounded-xl overflow-hidden aspect-video bg-gray-800 cursor-pointer">
-             <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" alt="Robot" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
-             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
-                <div className="flex items-center gap-2 mb-2">
-                   <Box size={14} className="text-brand-400" />
-                   <span className="text-xs font-bold text-brand-400 uppercase tracking-wider">Robotics</span>
-                </div>
-                <h3 className="text-xl font-bold text-white">Hexapod Walker</h3>
-             </div>
+            <img src="/images/basic-robotics-kits-for-engineering-students.jpg" alt="Robot" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
+              <div className="flex items-center gap-2 mb-2">
+                <Box size={14} className="text-brand-400" />
+                <span className="text-xs font-bold text-brand-400 uppercase tracking-wider">Robotics</span>
+              </div>
+              <h3 className="text-xl font-bold text-white">Hexapod Walker</h3>
+            </div>
           </div>
-          
+
           <div className="group relative rounded-xl overflow-hidden aspect-video bg-gray-800 cursor-pointer">
-             <img src="https://69415646eaa0bc88a50c8649.imgix.net/WhatsApp%20Image%202025-12-16%20at%2013.09.50.jpeg?auto=format&fit=crop&q=80&w=800" alt="Dashboard" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
-             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
-                <div className="flex items-center gap-2 mb-2">
-                   <Gauge size={14} className="text-purple-400" />
-                   <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">Industrial</span>
-                </div>
-                <h3 className="text-xl font-bold text-white">CAN Bus Logger</h3>
-             </div>
+            <img src="https://69415646eaa0bc88a50c8649.imgix.net/WhatsApp%20Image%202025-12-16%20at%2013.09.50.jpeg?auto=format&fit=crop&q=80&w=800" alt="Dashboard" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
+              <div className="flex items-center gap-2 mb-2">
+                <Gauge size={14} className="text-purple-400" />
+                <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">Industrial</span>
+              </div>
+              <h3 className="text-xl font-bold text-white">CAN Bus Logger</h3>
+            </div>
           </div>
-          
+
           <div className="group relative rounded-xl overflow-hidden aspect-video bg-gray-800 cursor-pointer">
-             <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=800" alt="Home Automation" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
-             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
-                <div className="flex items-center gap-2 mb-2">
-                   <Wifi size={14} className="text-blue-400" />
-                   <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">IoT</span>
-                </div>
-                <h3 className="text-xl font-bold text-white">Smart Plant Monitor</h3>
-             </div>
+            <img src="/images/hqdefault.jpg" alt="Home Automation" className="object-cover w-full h-full opacity-60 group-hover:opacity-40 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent p-6 flex flex-col justify-end">
+              <div className="flex items-center gap-2 mb-2">
+                <Wifi size={14} className="text-blue-400" />
+                <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">IoT</span>
+              </div>
+              <h3 className="text-xl font-bold text-white">Smart Plant Monitor</h3>
+            </div>
           </div>
         </div>
       </section>
@@ -380,27 +380,27 @@ export const Home: React.FC = () => {
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl font-bold text-white mb-6">Stay on the Bleeding Edge</h2>
           <p className="text-gray-400 max-w-xl mx-auto mb-8">
-             Join 15,000+ engineers receiving firmware updates, application notes, and early access to new hardware revisions.
+            Join 15,000+ engineers receiving firmware updates, application notes, and early access to new hardware revisions.
           </p>
           {subscribed ? (
-             <div className="animate-in fade-in zoom-in duration-300 bg-brand-500/10 border border-brand-500/50 rounded-lg px-6 py-4 max-w-md mx-auto">
-                <p className="text-brand-300 font-semibold flex items-center justify-center gap-2">
-                   <Check size={20} /> Thanks for subscribing!
-                </p>
-             </div>
+            <div className="animate-in fade-in zoom-in duration-300 bg-brand-500/10 border border-brand-500/50 rounded-lg px-6 py-4 max-w-md mx-auto">
+              <p className="text-brand-300 font-semibold flex items-center justify-center gap-2">
+                <Check size={20} /> Thanks for subscribing!
+              </p>
+            </div>
           ) : (
             <form onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-               <input 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-brand-500 focus:outline-none" 
-               />
-               <button type="submit" className="bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                  Subscribe
-               </button>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-1 bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-brand-500 focus:outline-none"
+              />
+              <button type="submit" className="bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                Subscribe
+              </button>
             </form>
           )}
         </div>
@@ -410,22 +410,22 @@ export const Home: React.FC = () => {
       {/* Trusted Brands Carousel */}
       <section className="py-12 bg-gray-900 border-t border-gray-800 overflow-hidden">
         <div className="text-center mb-8">
-           <p className="text-sm font-semibold text-brand-400 uppercase tracking-widest">Trusted By Engineering Teams At</p>
+          <p className="text-sm font-semibold text-brand-400 uppercase tracking-widest">Trusted By Engineering Teams At</p>
         </div>
         <div className="relative w-full flex overflow-hidden">
-           {/* Gradient Masks */}
-           <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-900 to-transparent"></div>
-           <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-900 to-transparent"></div>
-           
-           {/* Scrolling Content */}
-           <div className="flex animate-marquee whitespace-nowrap">
-              {[...BRANDS, ...BRANDS].map((brand, i) => (
-                  <div key={i} className="mx-8 flex items-center gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-default group">
-                     <brand.icon size={28} className="text-gray-500 group-hover:text-brand-400 transition-colors" />
-                     <span className="text-lg font-bold text-gray-400 group-hover:text-white transition-colors">{brand.name}</span>
-                  </div>
-              ))}
-           </div>
+          {/* Gradient Masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-900 to-transparent"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-900 to-transparent"></div>
+
+          {/* Scrolling Content */}
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...BRANDS, ...BRANDS].map((brand, i) => (
+              <div key={i} className="mx-8 flex items-center gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-default group">
+                <brand.icon size={28} className="text-gray-500 group-hover:text-brand-400 transition-colors" />
+                <span className="text-lg font-bold text-gray-400 group-hover:text-white transition-colors">{brand.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -94,7 +94,6 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
     }
     return true;
   });
-  const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
   // Sync with external activeBoard if passed
@@ -159,9 +158,9 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
     scrollToSlide(nextIdx);
   }, [currentIndex, scrollToSlide]);
 
-  // Smooth auto-scroll timer: pauses on hover, focus, or drag
+  // Smooth auto-scroll timer: pauses on focus or drag
   useEffect(() => {
-    if (!isAutoPlaying || isHovered || isFocused || isPointerDown) {
+    if (!isAutoPlaying || isFocused || isPointerDown) {
       return;
     }
 
@@ -170,7 +169,7 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
     }, AUTO_SCROLL_DELAY);
 
     return () => clearInterval(timer);
-  }, [isAutoPlaying, isHovered, isFocused, isPointerDown, handleNext]);
+  }, [isAutoPlaying, isFocused, isPointerDown, handleNext]);
 
   // IntersectionObserver to detect snapped slide
   useEffect(() => {
@@ -262,15 +261,13 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
     }
   };
 
-  const isPaused = !isAutoPlaying || isHovered || isFocused || isPointerDown;
+  const isPaused = !isAutoPlaying || isFocused || isPointerDown;
 
   return (
     <section 
       className="py-16 md:py-20 bg-gray-950 border-y border-gray-900 relative overflow-hidden select-none"
       aria-roledescription="carousel"
       aria-label="DarkLight Hardware Lineup"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsFocused(true)}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) {
@@ -303,65 +300,6 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
             <p className="mt-2 text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed text-pretty">
               Deterministic performance, non-blocking DMA peripherals, and modular architectures engineered for mission-critical embedded control.
             </p>
-          </div>
-
-          {/* Controls: Counter, Play/Pause Toggle & Prev/Next Buttons */}
-          <div className="flex items-center gap-3 self-start md:self-end shrink-0">
-            {/* Slide Index Counter */}
-            <div className="px-3.5 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 font-mono text-xs sm:text-sm font-medium tracking-wider tabular-nums flex items-center gap-1.5">
-              <span className="text-white font-bold">{String(currentIndex + 1).padStart(2, '0')}</span>
-              <span className="text-gray-600">/</span>
-              <span>{String(BOARDS.length).padStart(2, '0')}</span>
-              {isAutoPlaying && (
-                <span 
-                  className={`w-1.5 h-1.5 rounded-full ml-1 transition-[background-color] duration-300 ${
-                    isPaused ? 'bg-amber-400' : 'bg-brand-400 animate-pulse'
-                  }`} 
-                  title={isPaused ? 'Auto-scroll paused' : 'Auto-scroll running'}
-                  aria-hidden="true"
-                />
-              )}
-            </div>
-
-            {/* Play / Pause Toggle Button */}
-            <button
-              onClick={() => setIsAutoPlaying((prev) => !prev)}
-              aria-label={isAutoPlaying ? 'Pause carousel auto-scroll' : 'Resume carousel auto-scroll'}
-              aria-pressed={isAutoPlaying}
-              className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-700 active:scale-95 transition-[transform,opacity,background-color,border-color] duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 shadow-lg"
-            >
-              {isAutoPlaying ? (
-                <Pause 
-                  size={16} 
-                  aria-hidden="true" 
-                  className={isPaused ? 'text-amber-400' : 'text-brand-400'} 
-                />
-              ) : (
-                <Play 
-                  size={16} 
-                  aria-hidden="true" 
-                  className="text-gray-400 ml-0.5" 
-                />
-              )}
-            </button>
-
-            {/* Direction Arrows */}
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={handlePrev}
-                aria-label="Previous board"
-                className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-700 active:scale-95 transition-[transform,opacity,background-color,border-color] duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 shadow-lg"
-              >
-                <ChevronLeft size={20} aria-hidden="true" />
-              </button>
-              <button
-                onClick={handleNext}
-                aria-label="Next board"
-                className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-700 active:scale-95 transition-[transform,opacity,background-color,border-color] duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 shadow-lg"
-              >
-                <ChevronRight size={20} aria-hidden="true" />
-              </button>
-            </div>
           </div>
         </div>
 
@@ -424,7 +362,7 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
-          className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 px-4 sm:px-8 lg:px-12 cursor-grab active:cursor-grabbing"
+          className="flex gap-3 sm:gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-3 px-4 sm:px-8 lg:px-12 cursor-grab active:cursor-grabbing"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
@@ -443,7 +381,7 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Slide ${index + 1} of ${BOARDS.length}: ${board.title}`}
-                className={`snap-center shrink-0 w-[88vw] sm:w-[82vw] md:w-[740px] lg:w-[960px] xl:w-[1080px] rounded-3xl bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-950/95 border transition-[border-color,opacity,box-shadow] duration-500 relative overflow-hidden backdrop-blur-md p-6 sm:p-8 lg:p-10 shadow-2xl group ${
+                className={`snap-center shrink-0 w-[50vw] sm:w-[47vw] md:w-[416px] lg:w-[540px] xl:w-[608px] rounded-xl bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-950/95 border transition-[border-color,opacity,box-shadow] duration-500 relative overflow-hidden backdrop-blur-md p-3 sm:p-4 lg:p-5 shadow-2xl group ${
                   isActive
                     ? 'border-gray-700/80 shadow-brand-500/5 ring-1 ring-white/5'
                     : 'border-gray-800/80 opacity-85 hover:opacity-100'
@@ -451,53 +389,53 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
               >
                 {/* Background Ambient Glow */}
                 <div 
-                  className={`absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br ${meta.glowGradient} rounded-full blur-[90px] pointer-events-none`} 
+                  className={`absolute -top-20 -right-20 w-56 h-56 bg-gradient-to-br ${meta.glowGradient} rounded-full blur-[55px] pointer-events-none`} 
                   aria-hidden="true"
                 />
 
-                <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <div className="relative z-10 flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
                   {/* Left Column: Board Details & Specs */}
                   <div className="w-full lg:w-1/2 flex flex-col justify-between min-w-0">
                     <div>
                       {/* Tier Chip & Meta */}
-                      <div className="flex flex-wrap items-center gap-2 mb-4">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${meta.badgeBg} ${meta.accentClass} border ${meta.badgeBorder}`}>
-                          <Sparkles size={13} aria-hidden="true" />
+                      <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${meta.badgeBg} ${meta.accentClass} border ${meta.badgeBorder}`}>
+                          <Sparkles size={10} aria-hidden="true" />
                           {meta.tierBadge}
                         </span>
-                        <span className="text-xs text-gray-500 font-mono tracking-wide">
+                        <span className="text-[10px] text-gray-500 font-mono tracking-wide">
                           {meta.highlightTag}
                         </span>
                       </div>
 
                       {/* Board Title */}
-                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-3 tracking-tight group-hover:text-brand-300 transition-colors duration-200">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-white mb-1.5 tracking-tight group-hover:text-brand-300 transition-colors duration-200">
                         {board.title}
                       </h3>
 
                       {/* Board Description */}
-                      <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                      <p className="text-gray-400 text-[11px] sm:text-xs leading-relaxed mb-3">
                         {board.description}
                       </p>
 
                       {/* Specifications Grid */}
-                      <div className="mb-8">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-1.5">
-                          <Layers size={13} className="text-brand-400" aria-hidden="true" />
+                      <div className="mb-3.5">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-1.5 flex items-center gap-1">
+                          <Layers size={10} className="text-brand-400" aria-hidden="true" />
                           Key Hardware Architecture
                         </p>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                           {board.specs.map((spec, specIdx) => (
                             <li 
                               key={specIdx} 
-                              className={`flex items-center gap-2.5 text-xs sm:text-sm text-gray-300 bg-gray-950/60 border border-gray-800/80 rounded-xl px-3 py-2 transition-[border-color] duration-200 hover:border-gray-700 ${
+                              className={`flex items-center gap-1.5 text-[11px] text-gray-300 bg-gray-950/60 border border-gray-800/80 rounded-md px-2 py-1 transition-[border-color] duration-200 hover:border-gray-700 ${
                                 specIdx === board.specs.length - 1 && board.specs.length % 2 !== 0
                                   ? 'sm:col-span-2'
                                   : ''
                               }`}
                             >
-                              <div className="w-4 h-4 rounded-full bg-brand-500/20 border border-brand-500/50 flex items-center justify-center shrink-0">
-                                <Check size={10} className="text-brand-400" aria-hidden="true" />
+                              <div className="w-3 h-3 rounded-full bg-brand-500/20 border border-brand-500/50 flex items-center justify-center shrink-0">
+                                <Check size={8} className="text-brand-400" aria-hidden="true" />
                               </div>
                               <span className="font-medium leading-snug">{spec}</span>
                             </li>
@@ -507,26 +445,26 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
                     </div>
 
                     {/* Action Row */}
-                    <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-gray-800/80">
+                    <div className="flex flex-wrap items-center gap-2 pt-2.5 border-t border-gray-800/80">
                       <button
                         onClick={() => onOpenPinout(index)}
-                        className="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl font-semibold text-sm sm:text-base transition-[transform,background-color,box-shadow] duration-200 flex items-center justify-center gap-2 group/btn shadow-lg shadow-brand-600/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                        className="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-semibold text-[11px] sm:text-xs transition-[transform,background-color,box-shadow] duration-200 flex items-center justify-center gap-1 group/btn shadow-lg shadow-brand-600/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
                       >
-                        <Cpu size={18} aria-hidden="true" />
+                        <Cpu size={13} aria-hidden="true" />
                         <span>View Technical Pinout</span>
-                        <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-200 group-hover/btn:translate-x-1" />
+                        <ArrowRight size={12} aria-hidden="true" className="transition-transform duration-200 group-hover/btn:translate-x-1" />
                       </button>
 
                       <Link
                         to="/learn"
-                        className="px-5 py-3 bg-gray-800/80 hover:bg-gray-800 text-gray-200 hover:text-white border border-gray-700/80 rounded-xl font-semibold text-sm sm:text-base transition-[transform,background-color,color] duration-200 flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                        className="px-3 py-1.5 bg-gray-800/80 hover:bg-gray-800 text-gray-200 hover:text-white border border-gray-700/80 rounded-lg font-semibold text-[11px] sm:text-xs transition-[transform,background-color,color] duration-200 flex items-center gap-1 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
                       >
                         <span>Start Learning</span>
-                        <ExternalLink size={15} aria-hidden="true" className="text-gray-400" />
+                        <ExternalLink size={11} aria-hidden="true" className="text-gray-400" />
                       </Link>
 
-                      <div className="hidden sm:flex items-center gap-1.5 text-xs text-gray-500 ml-auto font-mono">
-                        <ShieldCheck size={14} aria-hidden="true" className="text-brand-400" />
+                      <div className="hidden sm:flex items-center gap-1 text-[10px] text-gray-500 ml-auto font-mono">
+                        <ShieldCheck size={11} aria-hidden="true" className="text-brand-400" />
                         <span>3.3V Logic Safe</span>
                       </div>
                     </div>
@@ -534,7 +472,7 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
 
                   {/* Right Column: Visual Board Presentation */}
                   <div className="w-full lg:w-1/2">
-                    <div className="relative rounded-2xl overflow-hidden border border-gray-800 bg-gray-950 shadow-2xl h-[280px] sm:h-[340px] lg:h-[420px] group/img">
+                    <div className="relative rounded-lg overflow-hidden border border-gray-800 bg-gray-950 shadow-2xl h-[158px] sm:h-[191px] lg:h-[236px] group/img">
                       {/* Board Photography with Smooth Zoom */}
                       <img
                         src={board.image.url}
@@ -546,24 +484,24 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
                       />
 
                       {/* Top Badges Overlay */}
-                      <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                        <div className="px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-mono text-gray-200 flex items-center gap-1.5 shadow-lg">
-                          <Radio size={12} aria-hidden="true" className={meta.accentClass} />
+                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none">
+                        <div className="px-2 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/10 text-[9px] font-mono text-gray-200 flex items-center gap-1 shadow-lg">
+                          <Radio size={9} aria-hidden="true" className={meta.accentClass} />
                           <span>DarkLight Silicon v1.2</span>
                         </div>
-                        <div className="px-2.5 py-1 rounded-lg bg-brand-500/20 backdrop-blur-md border border-brand-500/40 text-[11px] font-bold text-brand-300 font-mono shadow-lg">
+                        <div className="px-1.5 py-0.5 rounded bg-brand-500/20 backdrop-blur-md border border-brand-500/40 text-[9px] font-bold text-brand-300 font-mono shadow-lg">
                           48-PIN
                         </div>
                       </div>
 
                       {/* Bottom Info Gradient */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h4 className="text-lg font-bold text-white tracking-wide">
+                      <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <h4 className="text-sm font-bold text-white tracking-wide">
                             {board.image.title}
                           </h4>
                         </div>
-                        <p className="text-xs sm:text-sm text-gray-300 line-clamp-2">
+                        <p className="text-[11px] text-gray-300 line-clamp-2">
                           {board.image.desc}
                         </p>
                       </div>
@@ -616,6 +554,65 @@ export const BoardShowcaseCarousel: React.FC<BoardShowcaseCarouselProps> = ({
               }`}
             />
           ))}
+        </div>
+      </div>
+
+      {/* Controls: Counter, Play/Pause Toggle & Prev/Next Buttons */}
+      <div className="container mx-auto px-4 mt-4 flex items-center justify-center gap-3">
+        {/* Slide Index Counter */}
+        <div className="px-3.5 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 font-mono text-xs sm:text-sm font-medium tracking-wider tabular-nums flex items-center gap-1.5">
+          <span className="text-white font-bold">{String(currentIndex + 1).padStart(2, '0')}</span>
+          <span className="text-gray-600">/</span>
+          <span>{String(BOARDS.length).padStart(2, '0')}</span>
+          {isAutoPlaying && (
+            <span 
+              className={`w-1.5 h-1.5 rounded-full ml-1 transition-[background-color] duration-300 ${
+                isPaused ? 'bg-amber-400' : 'bg-brand-400 animate-pulse'
+              }`} 
+              title={isPaused ? 'Auto-scroll paused' : 'Auto-scroll running'}
+              aria-hidden="true"
+            />
+          )}
+        </div>
+
+        {/* Play / Pause Toggle Button */}
+        <button
+          onClick={() => setIsAutoPlaying((prev) => !prev)}
+          aria-label={isAutoPlaying ? 'Pause carousel auto-scroll' : 'Resume carousel auto-scroll'}
+          aria-pressed={isAutoPlaying}
+          className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-700 active:scale-95 transition-[transform,opacity,background-color,border-color] duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 shadow-lg"
+        >
+          {isAutoPlaying ? (
+            <Pause 
+              size={16} 
+              aria-hidden="true" 
+              className={isPaused ? 'text-amber-400' : 'text-brand-400'} 
+            />
+          ) : (
+            <Play 
+              size={16} 
+              aria-hidden="true" 
+              className="text-gray-400 ml-0.5" 
+            />
+          )}
+        </button>
+
+        {/* Direction Arrows */}
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={handlePrev}
+            aria-label="Previous board"
+            className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-700 active:scale-95 transition-[transform,opacity,background-color,border-color] duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 shadow-lg"
+          >
+            <ChevronLeft size={20} aria-hidden="true" />
+          </button>
+          <button
+            onClick={handleNext}
+            aria-label="Next board"
+            className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-700 active:scale-95 transition-[transform,opacity,background-color,border-color] duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 shadow-lg"
+          >
+            <ChevronRight size={20} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>

@@ -18,11 +18,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+      url: '/images/pic-microcontroller-projects.jpg',
       title: 'DarkLight Uhuru',
       desc: 'Entry-level professional embedded development board.',
     },
-    pinoutImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    pinoutImage: '/images/mcu-pinout.webp',
   },
   {
     title: 'DarkLight Katana',
@@ -40,11 +40,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+      url: '/images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp',
       title: 'DarkLight Katana',
       desc: 'Mid-tier development board for advanced applications.',
     },
-    pinoutImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    pinoutImage: '/images/images.jpeg',
   },
   {
     title: 'DarkLight Bravo',
@@ -62,11 +62,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+      url: '/images/mcubanner.jpg',
       title: 'DarkLight Bravo',
       desc: 'Flagship development board for professional applications.',
     },
-    pinoutImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    pinoutImage: '/images/mcu-pinout.webp',
   },
   {
     title: 'DarkLight Uhuru Connect',
@@ -84,11 +84,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+      url: '/images/pic-microcontroller-projects.jpg',
       title: 'DarkLight Uhuru Connect',
       desc: 'Entry-level board with wireless connectivity.',
     },
-    pinoutImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    pinoutImage: '/images/images.jpeg',
   },
   {
     title: 'DarkLight Katana Connect',
@@ -106,11 +106,11 @@ export const BOARDS = [
       'DMA',
     ],
     image: {
-      url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+      url: '/images/PTS-00204-211_Application_d90dc395-121e-42a0-bf84-adc077d6b4f8_480x480.webp',
       title: 'DarkLight Katana Connect',
       desc: 'Mid-tier board with wireless connectivity.',
     },
-    pinoutImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    pinoutImage: '/images/mcu-pinout.webp',
   },
 ];
 
